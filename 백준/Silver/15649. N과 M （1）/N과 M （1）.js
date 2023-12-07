@@ -1,35 +1,33 @@
 const input = require("fs")
   .readFileSync("/dev/stdin")
   .toString()
-  .split("\n")
-  .slice(0, -1);
-const NM = input[0].split(" ");
-const [n, m] = NM.map((v) => Number(v));
+  .trim()
+  .split("\n");
 
-function solution(n, m) {
-  const seq = [...Array(m)].fill(0);
-  const visited = [...Array(n)].fill(false);
+function solution(input) {
+  [n, m] = input[0].split(" ");
+  const N = Number(n);
+  const M = Number(m);
   let answer = "";
+  const output = [];
+  const visited = new Array(N).fill(false);
 
-  function dfs(k) {
-    if (k === m) {
-      const arr = [];
-      for (let i = 0; i < m; i++) {
-        arr.push(seq[i]);
-      }
-      return (answer += `${arr.join(" ")}\n`);
+  function dfs(count) {
+    if (count === M) {
+      answer += `${output.join(" ")}\n`;
+      return;
     }
-    for (let i = 1; i <= n; i++) {
-      if (!visited[i]) {
-        seq[k] = i;
-        visited[i] = true;
-        dfs(k + 1);
-        visited[i] = false;
-      }
+
+    for (let i = 0; i < N; i++) {
+      if (visited[i] === true) continue;
+      visited[i] = true;
+      output.push(i + 1);
+      dfs(count + 1);
+      output.pop();
+      visited[i] = false;
     }
   }
   dfs(0);
   return answer;
 }
-
-console.log(solution(n, m));
+console.log(solution(input));
