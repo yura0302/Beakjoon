@@ -1,12 +1,17 @@
 function solution(clothes) {
-    let answer=1;
-    let cloth= new Map();
-    for(let x in clothes){
-        cloth.set(clothes[x][1], (cloth.get(clothes[x][1])||0)+1);
-    }
+    let answer = 1;
+    let hashMap=new Map();
     
-    for(let [i,k] of cloth){
-        answer*=k+1;
-    }
-return answer-1
+    for(let [clothe, key] of clothes){
+        if(hashMap.has(key)){
+            hashMap.set(key,hashMap.get(key)+1);
+        }else {
+            hashMap.set(key,1);
+        }
+        }
+        for(let x of hashMap.values()){
+            answer*=(x+1);
+        }
+    answer-=1;
+    return answer;
 }
