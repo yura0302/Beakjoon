@@ -1,20 +1,18 @@
 import sys
-input = sys.stdin.readline
+sys.stdin.readline
+n=int(input().rstrip())
+answer=0
 
-n = int(input().rstrip())
-ans = 0
 while True:
-    if n%5 == 0:
-        ans += n//5
+    if n%5==0:
+        answer+=n//5
         break
     else:
         n-=2
-        ans+=1
-
+        answer+=1
     if n<0:
         break
-
 if n<0:
     print(-1)
 else:
-    print(ans)
+    print(answer)
