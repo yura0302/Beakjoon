@@ -1,5 +1,8 @@
-function solution(s) {
-    var answer = '';
-    let str=s.split(" ");
-    return Math.min(...str)+" "+Math.max(...str) ;
+function solution(s){
+    let number=s.split(" ").map(Number);
+    
+    let min =Math.min(...number);
+    let max=Math.max(...number);
+    
+    return `${min} ${max}`
 }
